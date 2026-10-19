@@ -1,0 +1,161 @@
+.craft {
+  --disc-size: 64vh;
+  --disc-x: 58%;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+  background: var(--field-3);
+  color: var(--ink-black);
+}
+
+.craft__disc {
+  position: absolute;
+  width: var(--disc-size);
+  height: var(--disc-size);
+  left: calc(var(--disc-x) - var(--disc-size) / 2);
+  top: calc(50% - var(--disc-size) / 2);
+  border-radius: 50%;
+  background: var(--disc);
+  transform: scale(0.94);
+  transition: background-color 500ms ease;
+}
+
+.craft__stage {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: min(100vh, 74vw);
+  left: calc(var(--disc-x) - min(100vh, 74vw) / 2);
+  pointer-events: none;
+}
+
+/* The parts list. A single marker slides beside it, carried by the same scroll that turns the craft. */
+.craft__nav {
+  position: absolute;
+  left: var(--margin);
+  bottom: calc(50% - var(--disc-size) / 2);
+  font-size: var(--step-title);
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.craft__heading {
+  font-size: inherit;
+  font-weight: 500;
+  color: var(--muted-on-3);
+  margin-bottom: 0.15em;
+}
+
+.craft__item {
+  position: relative;
+  color: var(--muted-on-3);
+  text-align: left;
+  transition: color var(--t-ui) ease;
+}
+.craft__item.is-active {
+  color: var(--ink-black);
+}
+@media (hover: hover) and (pointer: fine) {
+  .craft__item:hover {
+    color: var(--ink-black);
+  }
+}
+
+.craft__marker {
+  position: absolute;
+  top: 0;
+  left: -0.62em;
+  width: 0.28em;
+  height: 0.28em;
+  margin-top: -0.14em;
+  border-radius: 50%;
+  background: var(--ink-black);
+  will-change: transform;
+}
+
+.craft__fact {
+  position: absolute;
+  left: calc(var(--disc-x) + var(--disc-size) / 2 + 28px);
+  right: var(--margin);
+  bottom: calc(50% - var(--disc-size) / 2);
+  max-width: 28ch;
+  font-size: var(--step-body);
+  line-height: 1.45;
+  animation: fact-in 420ms var(--ease-out);
+}
+@keyframes fact-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@media (max-width: 1100px) {
+  .craft {
+    --disc-size: min(56vh, 52vw);
+  }
+  .craft__fact {
+    left: auto;
+    top: auto;
+    bottom: calc(50% - var(--disc-size) / 2);
+    max-width: 30ch;
+  }
+}
+
+@media (max-width: 760px) {
+  .craft {
+    --disc-size: 86vw;
+    --disc-x: 50%;
+  }
+  .craft__disc {
+    top: 96px;
+  }
+  .craft__stage {
+    top: 40px;
+    bottom: auto;
+    height: calc(86vw + 112px);
+    width: 112vw;
+    left: -6vw;
+  }
+  .craft__nav {
+    left: 0;
+    right: 0;
+    bottom: auto;
+    top: calc(86vw + 124px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 20px;
+    padding: 0 var(--margin);
+    white-space: nowrap;
+  }
+  .craft__list {
+    display: contents;
+  }
+  .craft__heading {
+    margin: 0;
+  }
+  .craft__item {
+    padding-block: 8px;
+  }
+  .craft__marker {
+    display: none;
+  }
+  .craft__fact {
+    left: var(--margin);
+    right: var(--margin);
+    top: calc(86vw + 278px);
+    bottom: auto;
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .craft__fact {
+    animation: none;
+  }
+  .craft__marker {
+    display: none;
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+.env*
+
+# design-tool scratch; keep only the image licence record
+.taste-skill/*
+!.taste-skill/credits.json

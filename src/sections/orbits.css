@@ -1,0 +1,100 @@
+.orbits {
+  --w: 14vw;
+  height: 100svh;
+  min-height: 640px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: var(--field-4);
+  color: var(--ink-black);
+}
+
+.orbits__headline {
+  font-size: var(--step-display);
+  line-height: 0.85;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.drop {
+  position: absolute;
+  z-index: 1;
+  width: var(--w);
+}
+.drop:has(.print:hover) {
+  z-index: 5;
+}
+/* The prints land around the words, never on them: one high on the left, one low on the right,
+   a third cropped by the bottom edge. The headline spans roughly 20vw to 80vw. */
+.drop--1 {
+  left: 2.5vw;
+  top: 9%;
+}
+.drop--2 {
+  left: 83vw;
+  top: 50%;
+}
+.drop--3 {
+  --w: 11vw;
+  left: 31%;
+  bottom: calc(var(--w) * -0.62);
+}
+
+.print {
+  rotate: var(--r);
+  border: 8px solid var(--ink);
+  background: var(--ink);
+  transition: rotate 200ms var(--ease-out);
+}
+.drop--1 .print { --r: -8deg; }
+.drop--2 .print { --r: 6deg; }
+.drop--3 .print { --r: -4deg; }
+
+.print img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+.drop--1 img { object-position: 58% 50%; }
+.drop--2 img { object-position: 50% 12%; }
+
+@media (hover: hover) and (pointer: fine) {
+  .print:hover {
+    --r: 0deg;
+  }
+}
+
+.orbits__sentence {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  max-width: 40ch;
+  font-size: var(--step-body);
+  line-height: 1.45;
+}
+
+@media (max-width: 760px) {
+  .orbits {
+    --w: 34vw;
+    height: 96svh;
+    min-height: 680px;
+  }
+  .orbits__headline {
+    font-size: 13vw;
+  }
+  .drop--1 { left: 6vw; top: 4%; }
+  .drop--2 { left: 58vw; top: 62%; }
+  .drop--1 .print { --r: -6deg; }
+  .drop--2 .print { --r: 5deg; }
+  .drop--3 {
+    display: none;
+  }
+  .print {
+    border-width: 6px;
+  }
+  .orbits__sentence {
+    left: var(--margin);
+    right: var(--margin);
+  }
+}

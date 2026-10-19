@@ -1,0 +1,249 @@
+/* Helix Orbital — tokens and foundation.
+   Direction: colour chapters (seed 1310656733). Palette: candy on black, read as the light of one orbit:
+   field-1 aurora, field-2 the blue limb, field-3 the Sun, field-4 sunrise, field-5 the day-side ocean. */
+
+:root {
+  --bg: #000000;
+  --surface: #0d0d0d;
+  --ink: #ffffff;
+  --muted: #999999;
+  --accent: #93f1f7;
+  --accent-ink: #000000;
+  --ink-black: #000000;
+
+  --field-1: #9ae187;
+  --field-2: #93f1f7;
+  --field-3: #f3ea7a;
+  --field-4: #fbb65c;
+  --field-5: #b9c8ff;
+  --field-5-deep: #a6b7f7;
+
+  /* Solid "soft ink" per light field, each at 4.5:1 or better against its field. */
+  --muted-on-1: #2c5a28;
+  --muted-on-2: #2f5c5f;
+  --muted-on-3: #5a5520;
+  --muted-on-5: #3b4677;
+
+  --font: 'Epilogue', system-ui, sans-serif;
+
+  /* Seven steps, used everywhere: small, body, lead, title, head, display, giant. */
+  --step-small: 0.875rem;
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-title: clamp(1.625rem, 1.1rem + 1.8vw, 2.75rem);
+  --step-head: clamp(2.5rem, 1.2rem + 5vw, 5.5rem);
+  --step-display: clamp(3.5rem, 9vw, 9rem);
+  --step-giant: clamp(11.25rem, 23vw, 23.75rem);
+
+  --margin: clamp(16px, 2.2vw, 32px);
+  --gutter: clamp(12px, 1.6vw, 24px);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --t-press: 140ms;
+  --t-hover: 180ms;
+  --t-ui: 240ms;
+  --t-reveal: 800ms;
+
+  --header-ink: var(--ink);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scrollbar-color: #4a4a4a var(--bg);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--step-body);
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+img,
+video,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* The focus ring takes the ink of the chapter it sits in, so it shows on black and on every
+   candy field alike (a cyan ring vanished on the cyan and lemon chapters). */
+[data-ink='light'] {
+  --focus: var(--ink);
+}
+[data-ink='dark'] {
+  --focus: var(--ink-black);
+}
+:focus-visible {
+  outline: 3px solid var(--focus, var(--accent));
+  outline-offset: 3px;
+}
+.bar :focus-visible {
+  outline-color: var(--header-ink);
+}
+
+/* Touch screens: every control gets at least a 44px target. */
+@media (pointer: coarse) {
+  .bar a,
+  .foot__cols a {
+    display: inline-block;
+    padding-block: 11px;
+  }
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.display {
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip {
+  position: fixed;
+  left: var(--margin);
+  top: -80px;
+  z-index: 100;
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding: 12px 18px;
+  font-weight: 500;
+}
+.skip:focus {
+  top: 16px;
+}
+
+/* The one button shape on the page: square corners, flat fill. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 52px;
+  padding: 0 26px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 500;
+  font-size: var(--step-body);
+  transition:
+    transform var(--t-press) var(--ease-out),
+    background-color var(--t-hover) ease,
+    color var(--t-hover) ease;
+}
+.button:active {
+  transform: scale(0.97);
+}
+.button--dark {
+  background: var(--ink-black);
+  color: var(--ink);
+}
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    background: var(--ink);
+    color: var(--ink-black);
+  }
+  .button--dark:hover {
+    background: var(--ink);
+    color: var(--ink-black);
+  }
+}
+
+.link {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 0.07em;
+  transition: text-decoration-color var(--t-hover) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+/* Masks used by line and character reveals. */
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+.mask > span {
+  display: block;
+}
+
+/* Chapters are full-bleed fields, butted together. */
+.chapter {
+  position: relative;
+  min-height: 90svh;
+}

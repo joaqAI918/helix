@@ -1,0 +1,80 @@
+.contact {
+  min-height: auto;
+  background: var(--field-5);
+  color: var(--ink-black);
+}
+
+.contact__rows {
+  font-style: normal;
+}
+
+.crow {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  min-height: 150px;
+  padding: 0 20px 26px;
+  font-size: var(--step-head);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  background: var(--field-5);
+}
+.crow:nth-child(even) {
+  background: var(--field-5-deep);
+}
+.crow--greet {
+  align-items: center;
+  padding-top: 26px;
+}
+
+.contact__zone {
+  display: inline-grid;
+  place-items: center;
+  padding: 24px;
+  margin: -24px;
+}
+
+.contact__send {
+  display: grid;
+  place-items: center;
+  width: 0.9em;
+  height: 0.9em;
+  border-radius: 50%;
+  background: var(--ink-black);
+  color: var(--ink);
+  transition: background-color var(--t-hover) ease;
+}
+.contact__send svg {
+  width: 42%;
+  transition: transform var(--t-ui) var(--ease-out);
+}
+.contact__send:active {
+  scale: 0.94;
+}
+@media (hover: hover) and (pointer: fine) {
+  .contact__send:hover {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .contact__send:hover svg {
+    transform: rotate(-45deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .crow {
+    min-height: 84px;
+    padding: 0 16px 16px;
+    font-size: 9.6vw;
+  }
+  .crow--greet {
+    justify-content: space-between;
+    padding-top: 16px;
+    background: var(--accent);
+  }
+  .contact__send {
+    width: 56px;
+    height: 56px;
+  }
+}

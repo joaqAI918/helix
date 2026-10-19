@@ -1,0 +1,66 @@
+.crew {
+  padding: 160px var(--margin) 180px;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.crew__heading {
+  font-size: var(--step-title);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.crew__grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 12px;
+  row-gap: 36px;
+}
+
+/* One treatment for every portrait: grey and contrasty, multiplied onto a rotating palette tint,
+   so the set reads as one family. Pointing at a tile lets the true colour through. */
+.member__frame {
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  isolation: isolate;
+}
+.member__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  filter: grayscale(1) contrast(1.15);
+  mix-blend-mode: multiply;
+  transition:
+    filter 500ms ease,
+    transform 900ms var(--ease-soft);
+}
+@media (hover: hover) and (pointer: fine) {
+  .member:hover .member__frame img {
+    filter: grayscale(0) contrast(1);
+    mix-blend-mode: normal;
+    transform: scale(1.04);
+  }
+}
+
+.member__name {
+  margin-top: 10px;
+  font-size: var(--step-small);
+  font-weight: 500;
+}
+.member__role {
+  font-size: var(--step-small);
+  color: var(--muted);
+}
+
+@media (max-width: 760px) {
+  .crew {
+    padding: 112px var(--margin) 120px;
+  }
+  .crew__grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 8px;
+  }
+}
