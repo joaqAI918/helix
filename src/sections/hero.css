@@ -158,6 +158,10 @@
   grid-area: 1 / 1;
   max-width: 46ch;
 }
+/* The scroll story swaps the phases in; without JavaScript, show the first rather than all four stacked. */
+html:not(.js) .phase-copy + .phase-copy {
+  visibility: hidden;
+}
 .phase-copy__name {
   font-size: var(--step-lead);
   font-weight: 900;

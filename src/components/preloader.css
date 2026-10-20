@@ -1,3 +1,7 @@
+/* The prerendered page carries the curtain too; without JavaScript nothing would ever lift it. */
+html:not(.js) .pre {
+  display: none;
+}
 .pre {
   position: fixed;
   inset: 0;

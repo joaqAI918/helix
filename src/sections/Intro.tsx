@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import { gsap, SplitText, useGSAP, prefersReducedMotion } from '../lib/gsap';
 import { intro, photos } from '../data/content';
 import './intro.css';
@@ -87,10 +87,14 @@ export default function Intro() {
       <div className="board">
         <div className="tile tile--a">
           <h2 className="slogan display" id="intro-title">
-            {intro.slogan.map((l) => (
-              <span className="mask" key={l}>
-                <span>{l}</span>
-              </span>
+            {intro.slogan.map((l, i) => (
+              <Fragment key={l}>
+                {/* The lines stack visually; the space keeps them separate words for crawlers and readers. */}
+                {i > 0 && ' '}
+                <span className="mask">
+                  <span>{l}</span>
+                </span>
+              </Fragment>
             ))}
           </h2>
         </div>

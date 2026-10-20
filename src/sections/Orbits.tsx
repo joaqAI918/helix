@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import { gsap, useGSAP, prefersReducedMotion } from '../lib/gsap';
 import { orbits } from '../data/content';
 import './orbits.css';
@@ -47,10 +47,14 @@ export default function Orbits() {
   return (
     <section className="orbits chapter" id="orbits" ref={root} data-ink="dark" aria-labelledby="orbits-title">
       <h2 className="orbits__headline display" id="orbits-title">
-        {orbits.headline.map((l) => (
-          <span className="mask" key={l}>
-            <span>{l}</span>
-          </span>
+        {orbits.headline.map((l, i) => (
+          <Fragment key={l}>
+            {/* The lines stack visually; the space keeps them separate words for crawlers and readers. */}
+            {i > 0 && ' '}
+            <span className="mask">
+              <span>{l}</span>
+            </span>
+          </Fragment>
         ))}
       </h2>
 
