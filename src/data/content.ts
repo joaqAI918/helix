@@ -210,7 +210,7 @@ export const season = {
     { name: 'Gate Start Classic', orbit: 'From the pad to orbit', date: '29 Aug', photo: photos.launch },
     { name: 'Lunar Slingshot', orbit: 'Earth to Moon and back', date: '3 Oct', photo: photos.launchNight },
     { name: 'Tycho Final', orbit: 'Low orbit, one sunrise', date: '21 Nov', photo: photos.sunrise },
-  ],
+  ].map((r) => ({ ...r, thumb: r.photo.src.replace(A, A + 'thumbs/') })),
 };
 
 export const contact = {

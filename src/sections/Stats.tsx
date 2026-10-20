@@ -12,7 +12,7 @@ export default function Stats() {
       if (prefersReducedMotion()) return;
       const tl = gsap.timeline({ scrollTrigger: { trigger: root.current, start: 'top 55%', once: true } });
       tl.from('.stats__claim > span', { yPercent: 110, duration: 0.9 })
-        .from('.stats__figure > span', { yPercent: 105, duration: 1.3, ease: 'expo.out' }, 0.25)
+        .from('.stats__figure > span[aria-hidden]', { yPercent: 105, duration: 1.3, ease: 'expo.out' }, 0.25)
         .from('.stats__caption', { y: 20, autoAlpha: 0, duration: 0.8, ease: 'power3.out' }, 0.6)
         .from('.stats__source', { autoAlpha: 0, duration: 0.6 }, 0.8);
     },
@@ -25,11 +25,12 @@ export default function Stats() {
         <span>{stats.claim}</span>
       </h2>
       <div className="stats__body">
-        <p className="stats__figure display mask" aria-label={`${stats.figure} ${stats.unit}`}>
-          <span>
+        <p className="stats__figure display mask">
+          <span aria-hidden="true">
             {stats.figure}
             <sup>{stats.unit}</sup>
           </span>
+          <span className="sr-only">{`${stats.figure} ${stats.unit}`}</span>
         </p>
         <p className="stats__caption">{stats.caption}</p>
       </div>

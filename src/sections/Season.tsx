@@ -48,7 +48,7 @@ export default function Season() {
               }}
               data-cursor={r.date}
             >
-              <img className="round__bullet" src={r.photo.src} alt="" width={64} height={64} loading="lazy" />
+              <img className="round__bullet" src={r.thumb} alt="" width={64} height={64} loading="lazy" decoding="async" />
               <strong className="round__name">{r.name}</strong>
               <p className="round__orbit">{r.orbit}</p>
               <p className="round__date">

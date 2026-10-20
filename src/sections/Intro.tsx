@@ -15,7 +15,7 @@ export default function Intro() {
         .from('.tile--c', { clipPath: 'inset(0% 0% 100% 0%)', duration: 1.0, ease: 'expo.inOut' }, 0.22)
         .from('.tile--c img', { scale: 1.25, duration: 1.6, ease: 'power3.out' }, 0.22)
         .from('.slogan .mask > span', { yPercent: 110, duration: 0.95, stagger: 0.11 }, 0.55)
-        .from('.tile--b .figure > span', { yPercent: 110, duration: 0.9 }, 0.65);
+        .from('.tile--b .figure > span[aria-hidden]', { yPercent: 110, duration: 0.9 }, 0.65);
 
       const counter = { v: 0 };
       tl.to(
@@ -65,8 +65,9 @@ export default function Intro() {
       );
 
       // Words brighten as they are read, from a floor that still passes 4.5:1 on black for anyone
-      // who stops scrolling halfway.
-      const split = SplitText.create('.board__text > p', { type: 'words' });
+      // who stops scrolling halfway. Whole words read fine as they are, so the paragraph keeps its own
+      // text for screen readers (no aria-label, which a plain <p> may not carry).
+      const split = SplitText.create('.board__text > p', { type: 'words', aria: 'none' });
       gsap.fromTo(
         split.words,
         { opacity: 0.5 },
@@ -99,10 +100,11 @@ export default function Intro() {
           </h2>
         </div>
         <div className="tile tile--b">
-          <p className="figure display mask" aria-label="92 minutes per race">
-            <span>
+          <p className="figure display mask">
+            <span aria-hidden="true">
               <span className="figure__num">92</span> min
             </span>
+            <span className="sr-only">92 minutes per race</span>
           </p>
         </div>
         <div className="tile tile--c">

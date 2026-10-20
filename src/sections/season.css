@@ -38,6 +38,7 @@
   font-size: var(--step-title);
   transition: color var(--t-hover) ease;
 }
+/* Square 128px crops (public/assets/thumbs), shown only in the touch layout below. */
 .round__bullet {
   display: none;
 }
